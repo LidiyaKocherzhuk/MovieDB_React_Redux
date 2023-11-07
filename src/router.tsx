@@ -1,6 +1,14 @@
-import {createBrowserRouter} from "react-router-dom";
+import {createBrowserRouter, Navigate} from "react-router-dom";
 
-const router= createBrowserRouter([
+import {MainLayout} from "./layouts/MainLayout";
+
+const router = createBrowserRouter([
+    {
+        path: '', element: <MainLayout/>, children: [
+            {index: true, element: <Navigate to={''}/>},
+
+        ]
+    }
 
 ]);
 
