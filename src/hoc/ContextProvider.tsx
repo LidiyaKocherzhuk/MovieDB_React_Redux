@@ -1,12 +1,14 @@
 import {createContext, FC, PropsWithChildren, useState} from "react";
 
+import {IContextState} from "../interfaces";
+
 const Context = createContext(null);
 
 interface IProps extends PropsWithChildren {
 }
 
 const ContextProvider: FC<IProps> = ({children}) => {
-    const state = useState({});
+    const state = useState<IContextState>({theme: false});
 
     return (
         <Context.Provider value={state}>

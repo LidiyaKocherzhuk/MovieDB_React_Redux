@@ -1,12 +1,22 @@
 import React, {FC, PropsWithChildren} from 'react';
-import {Outlet} from "react-router-dom";
+
+import css from './MainLayout.module.css';
+import {Header} from "../components/Header";
+import {useAppContext} from "../hooks/useAppContext";
 
 interface IProps extends PropsWithChildren {
 }
 
 const MainLayout: FC<IProps> = () => {
+    const {theme} = useAppContext();
+
     return (
-        <div>
+        <div className={css.MainLayout}>
+
+            <div className={`${css.content_layout } ${theme ? css.content_layout_light : css.content_layout_dark}`}>
+                <Header/>
+            </div>
+
         </div>
     );
 };
