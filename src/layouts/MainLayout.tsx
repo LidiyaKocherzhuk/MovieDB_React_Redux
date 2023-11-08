@@ -2,7 +2,7 @@ import React, {FC, PropsWithChildren} from 'react';
 import {Outlet} from "react-router-dom";
 
 import css from './MainLayout.module.css';
-import {Header} from "../components";
+import {Genres, Header} from "../components";
 import {useAppContext} from "../hooks";
 
 interface IProps extends PropsWithChildren {
@@ -16,6 +16,7 @@ const MainLayout: FC<IProps> = () => {
 
             <div className={`${css.content_layout} ${theme ? css.content_layout_light : css.content_layout_dark}`}>
                 <Header/>
+                <Genres/>
                 <Outlet/>
             </div>
 
