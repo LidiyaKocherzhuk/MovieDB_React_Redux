@@ -15,6 +15,7 @@
 .content_layout {
     border-radius: 20px;
     height: 100vh;
+    position: relative;
 }
 
 .content_layout_light,

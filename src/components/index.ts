@@ -1,4 +1,4 @@
-export * from './GenresBadge';
+export * from './GenresContainer';
 export * from './Header';
 export * from './MovieInfo';
 export * from './MoviesListCard';

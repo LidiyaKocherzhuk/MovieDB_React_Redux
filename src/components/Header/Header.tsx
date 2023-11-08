@@ -3,20 +3,21 @@ import {ImSearch, ImSun} from "react-icons/im";
 import {RxMoon} from "react-icons/rx";
 
 import css from './Header.module.css';
-import {useAppContext} from "../../hooks/useAppContext";
+import {useAppContext} from "../../hooks";
 
 interface IProps extends PropsWithChildren {
 }
 
 const Header: FC<IProps> = () => {
-    const {setTheme, theme} = useAppContext();
+
+    const {setTheme, theme, setGenresVisibility} = useAppContext();
 
     return (
         <div className={css.Header}>
 
             <div className={css.nav_side}>
 
-                <div className={css.nav_bar}>
+                <div className={css.nav_bar} onClick={() => setGenresVisibility()}>
                     <span className={`${css.nav_bar_element} ${theme ? css.nav_bar_light : css.nav_bar_dark}`}></span>
                     <span></span>
                     <span></span>
@@ -36,7 +37,7 @@ const Header: FC<IProps> = () => {
                     <ImSearch/>
                 </div>
 
-                <div onClick={() => setTheme(!theme)} className={css.light_dark_btn}>
+                <div onClick={() => setTheme()} className={css.light_dark_btn}>
                     {!theme ? <ImSun/> : <RxMoon/>}
                 </div>
 

@@ -1,4 +1,4 @@
 export interface IContextState {
     theme: boolean,
-    backdropPath: string,
+    genresVisibility: boolean,
 }

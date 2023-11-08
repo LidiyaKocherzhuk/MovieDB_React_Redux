@@ -1,0 +1,30 @@
+.Genres {
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    width: 15vw;
+    height: 85vh;
+    z-index: 10;
+    border-radius: 0 20px 20px 0;
+    transition: 1s;
+    padding: 10px;
+    font-weight: 500;
+}
+
+.Genres_hid {
+    left: -25vh;
+    transition: 1s;
+}
+
+.genre {
+    width: fit-content;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 3px;
+    transition: 1s;
+}
+
+.genre:hover {
+    border-bottom: 1px solid;
+    transition: 1s;
+}

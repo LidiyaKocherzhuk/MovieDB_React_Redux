@@ -8,9 +8,14 @@ const useAppContext = (): IUseContext => {
 
     return {
         theme: state.theme,
-        setTheme: (value: boolean) => setState((prev: IContextState) => ({...prev, theme: value})),
-        backdropPath: state.backdropPath,
-        setBackdropPath: (value: string) => setState((prev: IContextState) => ({...prev, backdropPath: value})),
+        setTheme: () => setState((prev: IContextState) => ({...prev, theme: !prev.theme})),
+        genresVisibility: state.genresVisibility,
+        setGenresVisibility: () => setState((prev: IContextState) => (
+            {
+                ...prev,
+                genresVisibility: !prev.genresVisibility,
+            }
+        )),
     };
 };
 
