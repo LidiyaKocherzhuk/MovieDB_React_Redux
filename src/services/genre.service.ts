@@ -1,0 +1,3 @@
+const genreService = {};
+
+export {genreService};

@@ -6,7 +6,6 @@
 
 .MainLayout {
     padding: 20px;
-    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,8 +15,6 @@
 .content_layout {
     border-radius: 20px;
     height: 100vh;
-    background-image: url("https://www.wikihow.com/images/thumb/9/9a/User-Not-Found-on-Instagram-Step-7.jpg/v4-1200px-User-Not-Found-on-Instagram-Step-7.jpg");
-
 }
 
 .content_layout_light,
@@ -30,4 +27,8 @@
 .content_layout_dark > div{
     background-color: rgba(0, 0, 0, 0.75);
     color: white;
+}
+
+span {
+    background: white;
 }

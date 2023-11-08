@@ -8,7 +8,10 @@ interface IProps extends PropsWithChildren {
 }
 
 const ContextProvider: FC<IProps> = ({children}) => {
-    const state = useState<IContextState>({theme: false});
+    const state = useState<IContextState>({
+            theme: false,
+            backdropPath: '/5lmhjGvg5ddXbTXzeNJfU4qpIeh.jpg'
+        });
 
     return (
         <Context.Provider value={state}>

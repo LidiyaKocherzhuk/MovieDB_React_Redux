@@ -1,17 +1,14 @@
 import React, {FC, PropsWithChildren} from 'react';
 
-import {PosterPreview} from "../components";
-
 interface IProps extends PropsWithChildren {
 }
 
-const MoviesHomePage: FC<IProps> = () => {
-
+const MovieInfo: FC<IProps> = () => {
     return (
         <div>
-            <PosterPreview/>
+
         </div>
     );
 };
 
-export {MoviesHomePage};
+export {MovieInfo};
