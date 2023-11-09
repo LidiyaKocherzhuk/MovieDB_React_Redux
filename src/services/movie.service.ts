@@ -1,10 +1,10 @@
 import {axiosService} from "./axios.service";
 import {urls} from "../constants";
 import {IRes} from "../types";
-import {IMoviePage, IQueryParams} from "../interfaces";
+import {IMoviePage} from "../interfaces";
 
 const movieService = {
-    getAll: (queryParams: IQueryParams): IRes<IMoviePage> => axiosService.get(urls.movies, {params: queryParams}).then(),
+    getAll: (queryParams: string): IRes<IMoviePage> => axiosService.get(urls.movies + queryParams).then(),
     getLatest: (): IRes<IMoviePage> => axiosService.get(urls.latest).then(),
 };
 

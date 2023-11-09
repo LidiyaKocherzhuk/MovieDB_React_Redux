@@ -5,4 +5,9 @@ export interface IUseContext {
     setGenresVisibility: () => void,
     posterPath: string,
     setPosterPath: (value: string) => void,
+    queryParams: {
+        page?: string,
+        with_genres?: string,
+    },
+    setQueryParams: (value: {}) => void,
 }

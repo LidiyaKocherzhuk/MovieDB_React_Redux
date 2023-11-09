@@ -68,8 +68,8 @@
 .right_side {
     width: 30%;
     display: flex;
-    justify-content: end;
     align-items: center;
+    justify-content: end;
     padding-right: 20px;
     column-gap: 20px;
 }
@@ -96,7 +96,6 @@
 
 .user {
     display: flex;
-    justify-content: end;
     align-items: center;
     column-gap: 10px;
 }

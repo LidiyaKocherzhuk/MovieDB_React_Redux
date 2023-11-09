@@ -1,10 +1,11 @@
 import React, {FC, PropsWithChildren, useEffect} from 'react';
-import {useLoaderData, useSearchParams} from "react-router-dom";
 import {AiOutlineLeft, AiOutlineRight} from "react-icons/ai";
+import {useLoaderData} from "react-router-dom";
 
 import css from './MoviesListCard.module.css';
 import {IMoviePage} from "../../interfaces";
 import {MovieCard} from "./MovieCard";
+import {useAppContext} from "../../hooks";
 
 interface IProps extends PropsWithChildren {
 }
@@ -12,9 +13,9 @@ interface IProps extends PropsWithChildren {
 const MoviesListCard: FC<IProps> = () => {
 
     const {data} = useLoaderData() as { data: IMoviePage };
-    const [queryParams, setQueryParams] = useSearchParams({page: '1'});
+    const {queryParams, setQueryParams} = useAppContext();
 
-    let page = Number(queryParams.get('page'));
+    let page = Number(queryParams.page) || 1;
 
     useEffect(() => {
         window.scrollTo(0, 0);

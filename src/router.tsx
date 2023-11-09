@@ -13,9 +13,7 @@ const router = createBrowserRouter([
                 path: 'movies',
                 element: <MoviesPage/>,
                 loader: ({request}) => movieService.getAll(
-                    {
-                        page: new URL(request.url).searchParams.get('page') || '1'
-                    }
+                    new URL(request.url).search
                 )
             },
             {path: 'movies/info/:id', element: <MovieInfoPage/>},
