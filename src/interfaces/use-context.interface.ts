@@ -3,4 +3,6 @@ export interface IUseContext {
     setTheme: () => void,
     genresVisibility: boolean
     setGenresVisibility: () => void,
+    posterPath: string,
+    setPosterPath: (value: string) => void,
 }

@@ -9,10 +9,15 @@ interface IProps extends PropsWithChildren {
 }
 
 const MainLayout: FC<IProps> = () => {
-    const {theme} = useAppContext();
+    const {theme, posterPath} = useAppContext();
 
     return (
-        <div className={css.MainLayout}>
+        <div
+            className={css.MainLayout}
+            style={{
+                backgroundImage: `url(${posterPath})`
+            }}
+        >
 
             <div className={`${css.content_layout} ${theme ? css.content_layout_light : css.content_layout_dark}`}>
                 <Header/>

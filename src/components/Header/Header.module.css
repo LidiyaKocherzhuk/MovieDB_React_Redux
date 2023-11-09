@@ -60,6 +60,7 @@
 .header {
     width: 40%;
     text-align: center;
+    cursor: pointer;
 }
 
 /*     RIGHT SIDE     */

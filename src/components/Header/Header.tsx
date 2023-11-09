@@ -4,6 +4,7 @@ import {RxMoon} from "react-icons/rx";
 
 import css from './Header.module.css';
 import {useAppContext} from "../../hooks";
+import {useNavigate} from "react-router-dom";
 
 interface IProps extends PropsWithChildren {
 }
@@ -11,6 +12,7 @@ interface IProps extends PropsWithChildren {
 const Header: FC<IProps> = () => {
 
     const {setTheme, theme, setGenresVisibility} = useAppContext();
+    const navigate = useNavigate();
 
     return (
         <div className={css.Header}>
@@ -23,13 +25,13 @@ const Header: FC<IProps> = () => {
                     <span></span>
                 </div>
 
-                <div className={css.nav_movies}>Movies</div>
+                <div className={css.nav_movies} onClick={() => navigate('/movies')}>Movies</div>
 
                 <div className={css.nav_new}>New & Popular</div>
 
             </div>
 
-            <h2 className={css.header}>Movie DB</h2>
+            <h2 className={css.header} onClick={() => navigate('/home')}>Movie DB</h2>
 
             <div className={css.right_side}>
 
