@@ -8,7 +8,8 @@
     border-radius: 0 20px 20px 0;
     transition: 1s;
     padding: 10px;
-    font-weight: 500;
+    font-weight: 700;
+    background: rgba(131, 131, 131, 0.95);
 }
 
 .Genres_hid {
@@ -19,12 +20,12 @@
 .genre {
     width: fit-content;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 17px;
     margin: 3px;
-    transition: 1s;
+    /*transition: 1s;*/
 }
 
 .genre:hover {
     border-bottom: 1px solid;
-    transition: 1s;
+    /*transition: 1s;*/
 }

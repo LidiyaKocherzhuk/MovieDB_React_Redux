@@ -18,7 +18,7 @@
 }
 
 .nav_bar {
-    width: 21px;
+    width: 25px;
     height: 50%;
     cursor: pointer;
     display: flex;
@@ -30,7 +30,7 @@
 .nav_bar_element,
 .nav_bar_element ~ span {
     margin: 2px 0;
-    height: 3px;
+    height: 4px;
 }
 
 .nav_bar_light,
