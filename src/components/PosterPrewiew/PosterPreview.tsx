@@ -11,7 +11,7 @@ interface IProps extends PropsWithChildren {
 }
 
 const PosterPreview: FC<IProps> = () => {
-    const {theme} = useAppContext();
+    const {theme, setPosterPath} = useAppContext();
 
     const [movies, setMovies] = useState<IMovie[]>([]);
     const [count, setCount] = useState<number>(0);
@@ -19,6 +19,12 @@ const PosterPreview: FC<IProps> = () => {
     useEffect(() => {
         movieService.getLatest().then(({data}) => setMovies(data.results));
     }, []);
+
+    useEffect(() => {
+        if (movies.length) {
+            setPosterPath(movies[count].poster_path);
+        }
+    }, [count, movies.length]);
 
     const prev = () => {
         setCount(prevState => prevState !== 0 ? --prevState : movies.length - 1);
@@ -33,9 +39,9 @@ const PosterPreview: FC<IProps> = () => {
 
             {movies[count] &&
                 <div className={`${css.Poster} ${theme && css.Poster_light}`}
-                    style={{
-                        backgroundImage: "url(" + `https://image.tmdb.org/t/p/w500/${movies[count].backdrop_path}` + ")"
-                    }}
+                     style={{
+                         backgroundImage: "url(" + `https://image.tmdb.org/t/p/w500/${movies[count].backdrop_path}` + ")"
+                     }}
                 >
                   <div className={css.short_description}>
                     <div className={css.movie_badge}>New Movie</div>

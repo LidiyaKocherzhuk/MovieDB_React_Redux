@@ -11,6 +11,7 @@ const ContextProvider: FC<IProps> = ({children}) => {
     const state = useState<IContextState>({
         theme: false,
         genresVisibility: false,
+        posterPath: 'https://image.tmdb.org/t/p/w500//iQ7G9LhP7NRRIUM4Vlai3eOxBAc.jpg',
     });
 
     return (

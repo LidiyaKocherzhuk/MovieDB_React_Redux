@@ -16,6 +16,13 @@ const useAppContext = (): IUseContext => {
                 genresVisibility: !prev.genresVisibility,
             }
         )),
+        posterPath: state.posterPath,
+        setPosterPath: (value: string) => setState((prev: IContextState) => (
+            {
+                ...prev,
+                posterPath: `https://image.tmdb.org/t/p/w500/${value}`
+            }
+        )),
     };
 };
 
