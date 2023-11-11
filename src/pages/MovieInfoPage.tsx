@@ -1,16 +1,19 @@
 import React, {FC, PropsWithChildren} from 'react';
-import {useParams} from "react-router-dom";
+import {useLoaderData,} from "react-router-dom";
+
+import {MovieInfo} from "../components";
+import {IMovieDetail} from "../interfaces";
 
 interface IProps extends PropsWithChildren {
 }
 
 const MovieInfoPage: FC<IProps> = () => {
 
-    const params = useParams();
+    const {data} = useLoaderData() as { data: IMovieDetail };
 
     return (
         <div>
-            MovieInfoPage
+            <MovieInfo movie={data}/>
         </div>
     );
 };

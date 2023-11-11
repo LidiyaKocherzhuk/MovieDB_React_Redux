@@ -24,6 +24,8 @@ const MoviesListCard: FC<IProps> = () => {
         setQueryParams({page, with_genres: queryObj.get('with_genres')});
     }, [page]);
 
+    console.log(location.search);
+
     const prev = () => {
         if (page !== 1) {
             page--;
