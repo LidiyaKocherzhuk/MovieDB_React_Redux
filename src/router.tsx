@@ -10,10 +10,10 @@ const router = createBrowserRouter([
             {index: true, element: <Navigate to={'home'}/>},
             {path: 'home', element: <MoviesHomePage/>},
             {
-                path: 'movies/:movieslist',
+                path: 'movies/:movies_list',
                 element: <MoviesPage/>,
                 loader: ({request, params}) => {
-                    switch (params.movieslist) {
+                    switch (params.movies_list) {
                         case 'all':
                             return movieService.getAll(new URL(request.url).search);
                         case 'popular':

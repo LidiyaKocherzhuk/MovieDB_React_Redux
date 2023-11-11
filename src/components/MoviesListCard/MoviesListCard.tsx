@@ -1,6 +1,6 @@
 import React, {FC, PropsWithChildren, useEffect} from 'react';
 import {AiOutlineLeft, AiOutlineRight} from "react-icons/ai";
-import {useLoaderData} from "react-router-dom";
+import {useLoaderData, useLocation} from "react-router-dom";
 
 import css from './MoviesListCard.module.css';
 import {IMoviePage} from "../../interfaces";
@@ -13,12 +13,15 @@ interface IProps extends PropsWithChildren {
 const MoviesListCard: FC<IProps> = () => {
 
     const {data} = useLoaderData() as { data: IMoviePage };
-    const {queryParams, setQueryParams} = useAppContext();
+    const {setQueryParams} = useAppContext();
+    const location = useLocation();
 
-    let page = Number(queryParams.page) || 1;
+    const queryObj = new URLSearchParams(location.search);
+    let page = Number(queryObj.get('page')) || 1;
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        setQueryParams({page, with_genres: queryObj.get('with_genres')});
     }, [page]);
 
     const prev = () => {

@@ -1,5 +1,5 @@
 import React, {FC, PropsWithChildren, useEffect, useState} from 'react';
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import css from './Genres.module.css';
 import {genreService} from "../../services";
@@ -18,11 +18,10 @@ const Genres: FC<IProps> = () => {
     useEffect(() => {
         genreService.getAll().then(({data}) => setGenres(data.genres));
     }, []);
-    console.log(useLocation());
+
 
     const moviesByTheGenre = (genreId: number) => {
-        navigate('/movies/all');
-        setQueryParams({with_genres: genreId.toString(), page: '1'});
+        navigate(`/movies/all?page=1&with_genres=${genreId.toString()}`);
         setGenresVisibility();
     }
 
