@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import css from './MoviesListCard.module.css';
 import {IMovie} from "../../interfaces";
 import {StarsRating} from '../StarsRating'
+import {urls} from "../../constants";
 
 interface IProps extends PropsWithChildren {
     movie: IMovie,
@@ -20,7 +21,7 @@ const MovieCard: FC<IProps> = ({movie}) => {
 
     return (
         <div className={css.MovieCard} onClick={() => moveToInfoPage()}>
-            <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={original_title}/>
+            <img src={`${urls.image}/${poster_path}`} alt={original_title}/>
             <div className={css.common_info}>
                 <StarsRating vote_average={vote_average}/>
                 {original_title}

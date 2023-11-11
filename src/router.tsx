@@ -10,11 +10,23 @@ const router = createBrowserRouter([
             {index: true, element: <Navigate to={'home'}/>},
             {path: 'home', element: <MoviesHomePage/>},
             {
-                path: 'movies',
+                path: 'movies/:movieslist',
                 element: <MoviesPage/>,
-                loader: ({request}) => movieService.getAll(
-                    new URL(request.url).search
-                )
+                loader: ({request, params}) => {
+                    switch (params.movieslist) {
+                        case 'all':
+                            return movieService.getAll(new URL(request.url).search);
+                        case 'popular':
+                            return movieService.getPopular(new URL(request.url).search);
+                        case 'topRated':
+                            return movieService.getTopRated(new URL(request.url).search);
+                        case 'upcoming':
+                            return movieService.getUpcoming(new URL(request.url).search);
+                        case 'latest':
+                            return movieService.getLatest(new URL(request.url).search);
+                    }
+
+                }
             },
             {path: 'movies/info/:id', element: <MovieInfoPage/>},
         ]

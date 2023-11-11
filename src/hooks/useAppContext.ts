@@ -3,6 +3,7 @@ import {useSearchParams} from "react-router-dom";
 
 import {Context} from "../hoc";
 import {IContextState, IUseContext} from "../interfaces";
+import {urls} from "../constants";
 
 const useAppContext = (): IUseContext => {
     const [state, setState] = useContext(Context);
@@ -24,7 +25,7 @@ const useAppContext = (): IUseContext => {
         setPosterPath: (value: string) => setState((prev: IContextState) => (
             {
                 ...prev,
-                posterPath: `https://image.tmdb.org/t/p/w500/${value}`
+                posterPath: `${urls.image}/${value}`
             }
         )),
 

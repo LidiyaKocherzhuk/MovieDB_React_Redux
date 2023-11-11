@@ -16,7 +16,7 @@
 }
 
 .content_layout {
-    margin: 20px;
+    margin: 60px;
     border-radius: 20px;
     min-height: 100vh;
     position: relative;
@@ -28,6 +28,6 @@
 }
 
 .content_layout_dark {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
 }

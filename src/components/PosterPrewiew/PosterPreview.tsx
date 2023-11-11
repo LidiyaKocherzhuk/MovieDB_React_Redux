@@ -5,7 +5,7 @@ import css from './Poster.module.css';
 import {movieService} from "../../services";
 import {IMovie} from "../../interfaces";
 import {useAppContext} from "../../hooks";
-import {BsArrowRight} from "react-icons/bs";
+import {urls} from "../../constants";
 
 interface IProps extends PropsWithChildren {
 }
@@ -17,7 +17,7 @@ const PosterPreview: FC<IProps> = () => {
     const [count, setCount] = useState<number>(0);
 
     useEffect(() => {
-        movieService.getLatest().then(({data}) => setMovies(data.results));
+        movieService.getLatest('').then(({data}) => setMovies(data.results));
     }, []);
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const PosterPreview: FC<IProps> = () => {
             {movies[count] &&
                 <div className={`${css.Poster} ${theme && css.Poster_light}`}
                      style={{
-                         backgroundImage: "url(" + `https://image.tmdb.org/t/p/w500/${movies[count].backdrop_path}` + ")"
+                         backgroundImage: "url(" + `${urls.image}/${movies[count].backdrop_path}` + ")"
                      }}
                 >
                   <div className={css.short_description}>

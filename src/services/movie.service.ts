@@ -5,7 +5,10 @@ import {IMoviePage} from "../interfaces";
 
 const movieService = {
     getAll: (queryParams: string): IRes<IMoviePage> => axiosService.get(urls.movies + queryParams).then(),
-    getLatest: (): IRes<IMoviePage> => axiosService.get(urls.latest).then(),
+    getLatest: (queryParams: string): IRes<IMoviePage> => axiosService.get(urls.latest + queryParams).then(),
+    getPopular: (queryParams: string): IRes<IMoviePage> => axiosService.get(urls.popular + queryParams).then(),
+    getTopRated: (queryParams: string): IRes<IMoviePage> => axiosService.get(urls.topRated + queryParams).then(),
+    getUpcoming: (queryParams: string): IRes<IMoviePage> => axiosService.get(urls.upcoming + queryParams).then(),
 };
 
 export {movieService};

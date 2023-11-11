@@ -25,7 +25,7 @@ const Header: FC<IProps> = () => {
                     <span></span>
                 </div>
 
-                <div className={css.nav_movies} onClick={() => navigate('/movies')}>Movies</div>
+                <div className={css.nav_movies} onClick={() => navigate('/movies/all')}>Movies</div>
 
                 <div className={css.nav_new}>New & Popular</div>
 
