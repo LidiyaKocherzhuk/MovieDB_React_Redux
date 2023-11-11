@@ -28,7 +28,11 @@ const router = createBrowserRouter([
 
                 }
             },
-            {path: 'movies/info/:id', element: <MovieInfoPage/>},
+            {
+                path: 'movies/info/:id',
+                element: <MovieInfoPage/>,
+                loader: ({params}) => movieService.getById(params.id)
+            },
         ]
     }
 
