@@ -1,12 +1,12 @@
 import {createBrowserRouter, Navigate} from "react-router-dom";
 
 import {MainLayout} from "./layouts";
-import {MovieInfoPage, MoviesHomePage, MoviesPage} from "./pages";
+import {MovieInfoPage, MoviesHomePage, MoviesPage, NotFound} from "./pages";
 import {movieService} from "./services";
 
 const router = createBrowserRouter([
     {
-        path: '', element: <MainLayout/>, children: [
+        path: '', element: <MainLayout/>, errorElement: <NotFound/>, children: [
             {index: true, element: <Navigate to={'home'}/>},
             {path: 'home', element: <MoviesHomePage/>},
             {
