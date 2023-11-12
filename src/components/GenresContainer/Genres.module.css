@@ -22,10 +22,8 @@
     cursor: pointer;
     font-size: 17px;
     margin: 3px;
-    /*transition: 1s;*/
 }
 
 .genre:hover {
     border-bottom: 1px solid;
-    /*transition: 1s;*/
 }

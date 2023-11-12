@@ -18,13 +18,12 @@ const MoviesListCard: FC<IProps> = () => {
 
     const queryObj = new URLSearchParams(location.search);
     let page = Number(queryObj.get('page')) || 1;
+    let with_genres = Number(queryObj.get('with_genres')) || null;
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        setQueryParams({page, with_genres: queryObj.get('with_genres')});
-    }, [page]);
-
-    console.log(location.search);
+        setQueryParams({page, with_genres});
+    }, [page, with_genres]);
 
     const prev = () => {
         if (page !== 1) {

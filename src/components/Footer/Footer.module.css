@@ -1,0 +1,47 @@
+.Footer {
+    height: 20vh;
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: #0000005c;
+    box-shadow: 0 -20px 8px 0 #0000005c;
+}
+
+.genres {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.genre {
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.genre:hover {
+    font-size: 17px;
+    transition: 0.5s;
+}
+
+.bottom_bloc {
+    display: flex;
+    align-items: flex-end;
+}
+
+.bottom_bloc > p {
+    width: 40%;
+}
+
+.logo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 20px;
+    padding: 20px;
+}
+
+.logo > img {
+    width: 15%;
+}
