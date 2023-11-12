@@ -43,9 +43,11 @@ const MovieCard: FC<IProps> = ({movie}) => {
                 <b>{original_title}</b>
             </div>
 
-            <div className={css.genres_badge}>
-                {genre_ids.map((genre) => <div>{genres.find(item => item.id === genre).name}</div>)}
-            </div>
+            {
+                genres.length && <div className={css.genres_badge}>
+                    {genre_ids.map((genre) => <div>{genres.find(item => item.id === genre).name}</div>)}
+                </div>
+            }
         </div>
     );
 };
