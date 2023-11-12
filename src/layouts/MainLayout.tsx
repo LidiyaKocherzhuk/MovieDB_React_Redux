@@ -1,16 +1,20 @@
-import React, {FC, PropsWithChildren} from 'react';
+import React, {FC, PropsWithChildren, useEffect} from 'react';
 import {Outlet} from "react-router-dom";
 
 import css from './MainLayout.module.css';
-import {Genres, Header} from "../components";
+import {Footer, Genres, Header} from "../components";
 import {useAppContext} from "../hooks";
-import {Footer} from "../components/Footer";
+import {genreService} from "../services";
 
 interface IProps extends PropsWithChildren {
 }
 
 const MainLayout: FC<IProps> = () => {
-    const {theme, posterPath} = useAppContext();
+    const {theme, posterPath, setGenres} = useAppContext();
+
+    useEffect(() => {
+        genreService.getAll().then(({data}) => setGenres(data.genres));
+    }, []);
 
     return (
         <div

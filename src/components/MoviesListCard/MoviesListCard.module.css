@@ -63,9 +63,26 @@
     border: 1px solid;
     font-size: 20px;
     border-radius: 0 0 10px 10px;
+    position: relative;
 }
 
 .common_info {
     padding: 0 10px 10px;
     cursor: pointer;
+}
+
+.genres_badge {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+.genres_badge > div {
+    margin-top: 2px;
+    width: fit-content;
+    font-size: 12px;
+    background: #ff6300;
+    padding: 2px;
+    border-radius: 5px;
+    text-align: center;
 }

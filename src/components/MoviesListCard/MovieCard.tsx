@@ -12,10 +12,15 @@ interface IProps extends PropsWithChildren {
 }
 
 const MovieCard: FC<IProps> = ({movie}) => {
-    const {id, original_title, poster_path, vote_average} = movie;
+    const {
+        id,
+        original_title,
+        poster_path,
+        vote_average,
+        genre_ids,
+    } = movie;
 
-    const {setPosterPath} = useAppContext();
-
+    const {setPosterPath, genres} = useAppContext();
     const navigate = useNavigate();
 
     const moveToInfoPage = () => {
@@ -35,7 +40,11 @@ const MovieCard: FC<IProps> = ({movie}) => {
 
             <div className={css.common_info}>
                 <StarsRating vote_average={vote_average}/>
-                {original_title}
+                <b>{original_title}</b>
+            </div>
+
+            <div className={css.genres_badge}>
+                {genre_ids.map((genre) => <div>{genres.find(item => item.id === genre).name}</div>)}
             </div>
         </div>
     );
