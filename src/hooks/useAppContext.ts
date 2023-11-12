@@ -2,7 +2,7 @@ import {useContext} from "react";
 import {useSearchParams} from "react-router-dom";
 
 import {Context} from "../hoc";
-import {IContextState, IUseContext} from "../interfaces";
+import {IContextState, IGenre, IUseContext} from "../interfaces";
 import {urls} from "../constants";
 
 const useAppContext = (): IUseContext => {
@@ -36,6 +36,14 @@ const useAppContext = (): IUseContext => {
             setSearchParams(params);
             setState((prev: IContextState) => ({...prev, queryParams: {...prev.queryParams, ...value}}))
         },
+
+        genres: state.genres,
+        setGenres: (value: IGenre[]) =>  setState((prev: IContextState) => (
+            {
+                ...prev,
+                genres: value,
+            }
+        )),
     };
 };
 
