@@ -4,6 +4,7 @@ import {Outlet} from "react-router-dom";
 import css from './MainLayout.module.css';
 import {Genres, Header} from "../components";
 import {useAppContext} from "../hooks";
+import {Footer} from "../components/Footer";
 
 interface IProps extends PropsWithChildren {
 }
@@ -23,6 +24,7 @@ const MainLayout: FC<IProps> = () => {
                 <Header/>
                 <Genres/>
                 <Outlet/>
+                <Footer/>
             </div>
 
         </div>
