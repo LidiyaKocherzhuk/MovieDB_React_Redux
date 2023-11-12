@@ -48,8 +48,12 @@
     cursor: pointer;
 }
 
+.pages b {
+  font-size: 20px;
+}
+
 .pages span:hover {
-    font-size: 20px;
+    background: rgba(0, 0, 0, 0.39);
 }
 
 /*       MovieCard Component     */

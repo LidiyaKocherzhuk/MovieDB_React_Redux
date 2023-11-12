@@ -8,6 +8,7 @@ export interface IUseContext {
     queryParams: {
         page?: string,
         with_genres?: string,
+        query?: string,
     },
     setQueryParams: (value: {}) => void,
 }
