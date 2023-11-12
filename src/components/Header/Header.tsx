@@ -28,7 +28,7 @@ const Header: FC<IProps> = () => {
 
                 <div className={css.nav_movies} onClick={() => navigate('/movies/all')}>Movies</div>
 
-                <div className={css.nav_new}>New & Popular</div>
+                <div className={css.nav_new} onClick={()=> navigate('/movies/popular')}>New & Popular</div>
 
             </div>
 
