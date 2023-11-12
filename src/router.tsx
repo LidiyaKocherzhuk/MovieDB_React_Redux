@@ -24,6 +24,13 @@ const router = createBrowserRouter([
                             return movieService.getUpcoming(new URL(request.url).search);
                         case 'latest':
                             return movieService.getLatest(new URL(request.url).search);
+                        case 'search':
+                            const queryParams = new URL(request.url).searchParams;
+
+                            return movieService.search({
+                                page: queryParams.get('page'),
+                                query: queryParams.get('query'),
+                            });
                     }
 
                 }

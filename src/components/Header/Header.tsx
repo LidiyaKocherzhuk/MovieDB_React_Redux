@@ -1,10 +1,11 @@
 import React, {FC, PropsWithChildren} from 'react';
-import {ImSearch, ImSun} from "react-icons/im";
+import {ImSun} from "react-icons/im";
 import {RxMoon} from "react-icons/rx";
+import {useNavigate} from "react-router-dom";
 
 import css from './Header.module.css';
 import {useAppContext} from "../../hooks";
-import {useNavigate} from "react-router-dom";
+import {Search} from "../Search";
 
 interface IProps extends PropsWithChildren {
 }
@@ -35,9 +36,7 @@ const Header: FC<IProps> = () => {
 
             <div className={css.right_side}>
 
-                <div className={css.search_btn}>
-                    <ImSearch/>
-                </div>
+                <Search/>
 
                 <div onClick={() => setTheme()} className={css.light_dark_btn}>
                     {!theme ? <ImSun/> : <RxMoon/>}
@@ -46,7 +45,7 @@ const Header: FC<IProps> = () => {
                 <div className={css.user}>
                     <img className={css.user_img}
                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOApFCSVByzhZorHUAP-J851JAYyOPtI1jdg&usqp=CAU"
-                         alt=""/>
+                         alt="user icon"/>
                     <div>user</div>
                 </div>
 

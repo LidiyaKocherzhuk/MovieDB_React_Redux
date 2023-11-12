@@ -10,7 +10,7 @@ const urls = {
     upcoming: movieLists + '/upcoming',
     byId: (id: string) => `${movieLists}/${id}`,
     genres: '/3/genre/movie/list',
-    search: '/3/search/keyword',
+    search: '/3/search/movie',
     image: 'https://image.tmdb.org/t/p/w1280',
 }
 

@@ -2,7 +2,8 @@ import {IGenre} from "./genre.inteface";
 
 export interface IMoviePage {
     page: number,
-    results: IMovie[]
+    results: IMovie[],
+    total_pages: number,
 }
 
 export interface IMovie {
