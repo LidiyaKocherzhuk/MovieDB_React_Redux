@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {RouterProvider} from "react-router-dom";
+import {RouterProvider} from 'react-router-dom';
 
-import {router} from "./router";
-import {ContextProvider} from "./hoc";
+import {router} from './router';
+import {ContextProvider} from './hoc';
+import {Provider} from 'react-redux';
+import {store} from './redux';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -11,6 +13,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <ContextProvider>
-        <RouterProvider router={router}/>
+
+        <Provider store={store}>
+            <RouterProvider router={router}/>
+        </Provider>
+
     </ContextProvider>
 );

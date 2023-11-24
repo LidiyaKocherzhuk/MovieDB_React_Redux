@@ -1,5 +1,3 @@
-import {IGenre} from "./genre.inteface";
-
 export interface IUseContext {
     theme: boolean,
     setTheme: () => void,
@@ -13,6 +11,4 @@ export interface IUseContext {
         query?: string,
     },
     setQueryParams: (value: {}) => void,
-    genres: IGenre[],
-    setGenres: (value: IGenre[]) => void,
 }

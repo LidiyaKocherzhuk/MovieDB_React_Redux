@@ -1,19 +1,30 @@
-import React, {FC, PropsWithChildren} from 'react';
+import React, {useEffect} from 'react';
 
 import {CertainMoviesList, PosterPreview} from "../components";
-import {movieService} from "../services";
+import {movieActions} from "../redux";
+import {useAppDispatch, useAppSelector} from "../hooks";
 
-interface IProps extends PropsWithChildren {
-}
+const MoviesHomePage = () => {
+    const {
+        popularMoviesPage,
+        topRatedMoviesPage,
+        upcomingMoviesPage,
+    } = useAppSelector(state => state.movieReducer);
 
-const MoviesHomePage: FC<IProps> = () => {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(movieActions.getPopularMovies({movies_list: 'popular', query: ''}))
+        dispatch(movieActions.getTopRatedMovies({movies_list: 'topRated', query: ''}))
+        dispatch(movieActions.getUpcomingMovies({movies_list: 'upcoming', query: ''}))
+    }, []);
 
     return (
         <div>
             <PosterPreview/>
-            <CertainMoviesList service={movieService.getPopular('')} typeName={'Popular'}/>
-            <CertainMoviesList service={movieService.getTopRated('')} typeName={'TopRated'}/>
-            <CertainMoviesList service={movieService.getUpcoming('')} typeName={'Upcoming'}/>
+            <CertainMoviesList movies={popularMoviesPage.results} typeName={'Popular'}/>
+            <CertainMoviesList movies={topRatedMoviesPage.results} typeName={'TopRated'}/>
+            <CertainMoviesList movies={upcomingMoviesPage.results} typeName={'Upcoming'}/>
         </div>
     );
 };

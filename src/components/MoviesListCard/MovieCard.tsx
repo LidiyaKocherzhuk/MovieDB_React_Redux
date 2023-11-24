@@ -5,7 +5,7 @@ import css from './MoviesListCard.module.css';
 import {IMovie} from "../../interfaces";
 import {StarsRating} from '../StarsRating'
 import {urls} from "../../constants";
-import {useAppContext} from "../../hooks";
+import {useAppContext, useAppSelector} from "../../hooks";
 
 interface IProps extends PropsWithChildren {
     movie: IMovie,
@@ -20,7 +20,8 @@ const MovieCard: FC<IProps> = ({movie}) => {
         genre_ids,
     } = movie;
 
-    const {setPosterPath, genres} = useAppContext();
+    const {setPosterPath} = useAppContext();
+    const {genres} = useAppSelector(state => state.genreReducer);
     const navigate = useNavigate();
 
     const moveToInfoPage = () => {

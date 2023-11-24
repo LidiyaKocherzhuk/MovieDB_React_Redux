@@ -13,7 +13,6 @@ const ContextProvider: FC<IProps> = ({children}) => {
         genresVisibility: false,
         posterPath: 'https://image.tmdb.org/t/p/w500//iQ7G9LhP7NRRIUM4Vlai3eOxBAc.jpg',
         queryParams: {},
-        genres: [],
     });
 
     return (

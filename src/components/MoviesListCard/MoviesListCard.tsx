@@ -1,18 +1,14 @@
-import React, {FC, PropsWithChildren, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {AiOutlineLeft, AiOutlineRight} from "react-icons/ai";
-import {useLoaderData, useLocation, useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 import css from './MoviesListCard.module.css';
-import {IMoviePage} from "../../interfaces";
 import {MovieCard} from "./MovieCard";
-import {useAppContext} from "../../hooks";
+import {useAppContext, useAppSelector} from "../../hooks";
 
-interface IProps extends PropsWithChildren {
-}
+const MoviesListCard = () => {
 
-const MoviesListCard: FC<IProps> = () => {
-
-    const {data} = useLoaderData() as { data: IMoviePage };
+    const {allMoviesPage} = useAppSelector(state => state.movieReducer);
     const {setQueryParams} = useAppContext();
     const location = useLocation();
     const {movies_list} = useParams();
@@ -35,7 +31,7 @@ const MoviesListCard: FC<IProps> = () => {
     };
 
     const next = () => {
-        if (page !== (movies_list === 'search' ? data.total_pages : '500')) {
+        if (page !== (movies_list === 'search' ? allMoviesPage.total_pages : '500')) {
             page++;
             setQueryParams({page: page.toString()});
         }
@@ -44,7 +40,7 @@ const MoviesListCard: FC<IProps> = () => {
         setQueryParams({page: '1'});
     }
     const last = () => {
-        setQueryParams({page: query ? data.total_pages : '500'});
+        setQueryParams({page: query ? allMoviesPage.total_pages : '500'});
     }
 
     return (
@@ -54,7 +50,7 @@ const MoviesListCard: FC<IProps> = () => {
             <div className={css.MoviesListCard}>
 
                 <div className={css.moviesList}>
-                    {data.results.map((movie) => <MovieCard key={movie.id} movie={movie}/>)}
+                    {allMoviesPage.results.map((movie) => <MovieCard key={movie.id} movie={movie}/>)}
                 </div>
 
                 <div className={css.pagination_bloc}>
@@ -62,7 +58,7 @@ const MoviesListCard: FC<IProps> = () => {
                     <div className={css.pages}>
                         <span onClick={() => first()}>1</span>
                         <b>... {page} ...</b>
-                        <span onClick={() => last()}>{movies_list === 'search' ? data.total_pages : '500'}</span>
+                        <span onClick={() => last()}>{movies_list === 'search' ? allMoviesPage.total_pages : '500'}</span>
                     </div>
                     <div className={css.next} onClick={() => next()}><AiOutlineRight/></div>
                 </div>

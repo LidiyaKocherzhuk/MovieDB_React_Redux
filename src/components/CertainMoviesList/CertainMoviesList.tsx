@@ -1,25 +1,18 @@
-import React, {FC, PropsWithChildren, useEffect, useState} from 'react';
+import React, {FC, PropsWithChildren} from 'react';
 import {BsArrowRight} from "react-icons/bs";
 import {useNavigate} from "react-router-dom";
 
 import css from './CertainMoviesList.module.css';
-import {IMovie, IMoviePage} from "../../interfaces";
 import {MovieCard} from "../MoviesListCard";
-import {IRes} from "../../types";
+import {IMovie} from "../../interfaces";
 
 interface IProps extends PropsWithChildren {
-    service: IRes<IMoviePage>,
+    movies: IMovie[],
     typeName: string,
 }
 
-const CertainMoviesList: FC<IProps> = ({service, typeName}) => {
-
-    const [movies, setMovies] = useState<IMovie[]>([]);
+const CertainMoviesList: FC<IProps> = ({movies, typeName}) => {
     const navigate = useNavigate();
-
-    useEffect(() => {
-        service.then(({data}) => setMovies(data.results));
-    }, [service]);
 
     const moveToMoviesPage = () => {
         navigate(`/movies/${typeName.toLowerCase()}`);

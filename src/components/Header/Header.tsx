@@ -1,19 +1,30 @@
-import React, {FC, PropsWithChildren} from 'react';
+import React from 'react';
 import {ImSun} from "react-icons/im";
 import {RxMoon} from "react-icons/rx";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 import css from './Header.module.css';
-import {useAppContext} from "../../hooks";
+import {useAppContext, useAppDispatch} from "../../hooks";
 import {Search} from "../Search";
+import {movieActions} from "../../redux";
 
-interface IProps extends PropsWithChildren {
-}
-
-const Header: FC<IProps> = () => {
+const Header = () => {
 
     const {setTheme, theme, setGenresVisibility} = useAppContext();
+    const dispatch = useAppDispatch();
+    const location = useLocation();
     const navigate = useNavigate();
+
+    const moveToMoviesPage = async (params: string) => {
+        const {meta: {requestStatus}} = await dispatch(movieActions.getAllMovies({
+            movies_list: params,
+            query: location.search
+        }));
+
+        if (requestStatus === 'fulfilled') {
+            navigate(`/movies/${params}`);
+        }
+    };
 
     return (
         <div className={css.Header}>
@@ -26,9 +37,9 @@ const Header: FC<IProps> = () => {
                     <span></span>
                 </div>
 
-                <div className={css.nav_movies} onClick={() => navigate('/movies/all')}>Movies</div>
+                <div className={css.nav_movies} onClick={() => moveToMoviesPage('all')}>Movies</div>
 
-                <div className={css.nav_new} onClick={()=> navigate('/movies/popular')}>New & Popular</div>
+                <div className={css.nav_new} onClick={() => () => moveToMoviesPage('popular')}>New & Popular</div>
 
             </div>
 

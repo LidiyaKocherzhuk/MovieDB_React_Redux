@@ -3,18 +3,20 @@ import {Outlet} from "react-router-dom";
 
 import css from './MainLayout.module.css';
 import {Footer, Genres, Header} from "../components";
-import {useAppContext} from "../hooks";
+import {useAppContext, useAppDispatch} from "../hooks";
 import {genreService} from "../services";
+import {genreActions} from "../redux";
 
 interface IProps extends PropsWithChildren {
 }
 
 const MainLayout: FC<IProps> = () => {
-    const {theme, posterPath, setGenres} = useAppContext();
+    const {theme, posterPath} = useAppContext();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        genreService.getAll().then(({data}) => setGenres(data.genres));
-    }, [setGenres]);
+        dispatch(genreActions.getAll);
+    }, []);
 
     return (
         <div

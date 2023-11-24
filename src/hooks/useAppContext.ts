@@ -35,15 +35,7 @@ const useAppContext = (): IUseContext => {
 
             setSearchParams(params);
             setState((prev: IContextState) => ({...prev, queryParams: {...prev.queryParams, ...value}}))
-        },
-
-        genres: state.genres,
-        setGenres: (value: IGenre[]) =>  setState((prev: IContextState) => (
-            {
-                ...prev,
-                genres: value,
-            }
-        )),
+        }
     };
 };
 

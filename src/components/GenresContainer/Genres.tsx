@@ -1,15 +1,13 @@
-import React, {FC, PropsWithChildren} from 'react';
+import React from 'react';
 import {useNavigate} from "react-router-dom";
 
 import css from './Genres.module.css';
-import {useAppContext} from "../../hooks";
+import {useAppContext, useAppSelector} from "../../hooks";
 
-interface IProps extends PropsWithChildren {
-}
+const Genres = () => {
 
-const Genres: FC<IProps> = () => {
-
-    const {genres, genresVisibility, setGenresVisibility} = useAppContext();
+    const {genresVisibility, setGenresVisibility} = useAppContext();
+    const {genres} = useAppSelector(state => state.genreReducer);
     const navigate = useNavigate();
 
     const moviesByTheGenre = (genreId: number) => {
