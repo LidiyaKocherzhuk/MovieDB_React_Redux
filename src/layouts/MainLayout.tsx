@@ -14,7 +14,7 @@ const MainLayout: FC<IProps> = () => {
 
     useEffect(() => {
         genreService.getAll().then(({data}) => setGenres(data.genres));
-    }, []);
+    }, [setGenres]);
 
     return (
         <div
