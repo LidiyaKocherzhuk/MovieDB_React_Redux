@@ -25,107 +25,97 @@ const initialState: IState = {
 
 //Change all by one
 
-const getAllMovies = createAsyncThunk<{ all: IMoviePage }, { movies_list: string, query: string }>(
+const getAllMovies = createAsyncThunk<{ movies: IMoviePage, page: string }, { movies_list: string, query: string }>(
     'movieSlice/getAllMovies',
-    async ({movies_list, query}, {rejectWithValue}) => {
+    async ({movies_list, query}, {dispatch, rejectWithValue}) => {
         try {
-            const {data} = await movieService.getAll(query);
-            return {all: data}
+            let movies: IMoviePage;
+
+            switch (movies_list) {
+                case 'all':
+                    await movieService
+                        .getAll(query).then(({data}) => movies = data);
+                    break;
+                case 'popular':
+                    await movieService
+                        .getPopular(query).then(({data}) => {
+                            movies = data;
+                            dispatch(movieActions.setPopularMovies({movies: data}));
+                        });
+                    break;
+                case 'topRated':
+                    await movieService
+                        .getTopRated(query).then(({data}) => {
+                            movies = data;
+                            dispatch(movieActions.setTopRatedMovies({movies: data}));
+                        });
+                    break;
+                case 'upcoming':
+                    await movieService
+                        .getUpcoming(query).then(({data}) => {
+                            movies = data;
+                            dispatch(movieActions.setUpcomingMovies({movies: data}));
+                        });
+                    break;
+                case 'latest':
+                    await movieService
+                        .getLatest(query).then(({data}) => {
+                            movies = data;
+                            dispatch(movieActions.setLatestMovies({movies: data}));
+                        });
+                    break;
+                // case 'search':
+                //     const queryParams = new URL(request.url).searchParams;
+                //
+                //     const {data} = await movieService.search({
+                //         page: queryParams.get('page'),
+                //         query: queryParams.get('query'),
+                //     });
+                //     movies = data;
+                //     break;
+            }
+
+            return {movies, page: movies_list};
         } catch (error) {
             return rejectWithValue(error);
         }
     }
 );
 
-const getPopularMovies = createAsyncThunk<{ popular: IMoviePage }, { movies_list: string, query: string }>(
-    'movieSlice/getPopularMovies',
-    async ({movies_list, query}, {rejectWithValue}) => {
-        try {
-            const {data} = await movieService.getPopular(query);
-            return {popular: data}
-        } catch (error) {
-            return rejectWithValue(error);
-        }
-    }
-);
-
-const getTopRatedMovies = createAsyncThunk<{ topRated: IMoviePage }, { movies_list: string, query: string }>(
-    'movieSlice/getTopRatedMovies',
-    async ({movies_list, query}, {rejectWithValue}) => {
-        try {
-            const {data} = await movieService.getTopRated(query);
-            return {topRated: data}
-        } catch (error) {
-            return rejectWithValue(error);
-        }
-    }
-);
-
-const getUpcomingMovies = createAsyncThunk<{ upcoming: IMoviePage }, { movies_list: string, query: string }>(
-    'movieSlice/getUpcomingMovies',
-    async ({movies_list, query}, {rejectWithValue}) => {
-        try {
-            const {data} = await movieService.getUpcoming(query);
-            return {upcoming: data}
-        } catch (error) {
-            return rejectWithValue(error);
-        }
-    }
-);
-
-const getLatestMovies = createAsyncThunk<{ latest: IMoviePage }, { movies_list: string, query: string }>(
-    'movieSlice/getLatestMovies',
-    async ({movies_list, query}, {rejectWithValue}) => {
-        try {
-            const {data} = await movieService.getLatest(query);
-            return {latest: data}
-        } catch (error) {
-            return rejectWithValue(error);
-        }
-    }
-);
 
 const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        setMovies: (state, action: { payload: { movies: IMoviePage } }) => {
+            state.allMoviesPage = action.payload.movies;
+        },
+        setPopularMovies: (state, action: { payload: { movies: IMoviePage } }) => {
+            state.popularMoviesPage = action.payload.movies;
+        },
+        setTopRatedMovies: (state, action: { payload: { movies: IMoviePage } }) => {
+            state.topRatedMoviesPage = action.payload.movies;
+        },
+        setUpcomingMovies: (state, action: { payload: { movies: IMoviePage } }) => {
+            state.upcomingMoviesPage = action.payload.movies;
+        },
+        setLatestMovies: (state, action: { payload: { movies: IMoviePage } }) => {
+            state.latestMoviesPage = action.payload.movies;
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(getAllMovies.fulfilled, (state, action) => {
-                console.log(action.payload, 'all');
-                state.allMoviesPage = action.payload.all;
-            })
-            .addCase(getPopularMovies.fulfilled, (state, action) => {
-                console.log(action.payload, 'popular');
-                state.allMoviesPage = action.payload.popular;
-            })
-            .addCase(getTopRatedMovies.fulfilled, (state, action) => {
-                console.log(action.payload, 'topRated');
-                state.allMoviesPage = action.payload.topRated;
-            })
-            .addCase(getUpcomingMovies.fulfilled, (state, action) => {
-                console.log(action.payload, 'upcoming');
-                state.allMoviesPage = action.payload.upcoming;
-            })
-            .addCase(getLatestMovies.fulfilled, (state, action) => {
-                console.log(action.payload, 'latest');
-                state.allMoviesPage = action.payload.latest;
+                console.log(action.payload);
+                state.allMoviesPage = action.payload.movies;
             })
             .addMatcher(isFulfilled(
                 getAllMovies,
-                getPopularMovies,
-                getTopRatedMovies,
-                getUpcomingMovies,
-                getLatestMovies,
-            ), state => {
+            ), (state, actions) => {
                 state.error = false;
             })
             .addMatcher(isRejected(
                 getAllMovies,
-                getPopularMovies,
-                getTopRatedMovies,
-                getUpcomingMovies,
-                getLatestMovies,
             ), state => {
                 state.error = true;
             })
@@ -140,10 +130,6 @@ const {
 const movieActions = {
     ...actions,
     getAllMovies,
-    getPopularMovies,
-    getTopRatedMovies,
-    getUpcomingMovies,
-    getLatestMovies,
 };
 
 export {

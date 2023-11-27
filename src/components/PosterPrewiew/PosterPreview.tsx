@@ -2,22 +2,24 @@ import React, {FC, PropsWithChildren, useEffect, useState} from 'react';
 import {AiOutlineLeft, AiOutlineRight} from "react-icons/ai";
 
 import css from './Poster.module.css';
-import {movieService} from "../../services";
-import {IMovie} from "../../interfaces";
-import {useAppContext} from "../../hooks";
+import {useAppContext, useAppDispatch} from "../../hooks";
 import {urls} from "../../constants";
+import {movieActions} from "../../redux";
+import {IMovie} from "../../interfaces";
+
 
 interface IProps extends PropsWithChildren {
+    movies: IMovie[];
 }
 
-const PosterPreview: FC<IProps> = () => {
+const PosterPreview: FC<IProps> = ({movies}) => {
     const {theme, setPosterPath} = useAppContext();
+    const dispatch = useAppDispatch();
 
-    const [movies, setMovies] = useState<IMovie[]>([]);
     const [count, setCount] = useState<number>(0);
 
     useEffect(() => {
-        movieService.getLatest('').then(({data}) => setMovies(data.results));
+        dispatch(movieActions.getAllMovies({movies_list: 'latest', query: ''}))
     }, []);
 
     useEffect(() => {

@@ -9,22 +9,42 @@ const MoviesHomePage = () => {
         popularMoviesPage,
         topRatedMoviesPage,
         upcomingMoviesPage,
+        latestMoviesPage,
     } = useAppSelector(state => state.movieReducer);
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(movieActions.getPopularMovies({movies_list: 'popular', query: ''}))
-        dispatch(movieActions.getTopRatedMovies({movies_list: 'topRated', query: ''}))
-        dispatch(movieActions.getUpcomingMovies({movies_list: 'upcoming', query: ''}))
-    }, []);
+        if (!latestMoviesPage) {
+            dispatch(movieActions.getAllMovies({movies_list: 'latest', query: ''}));
+        }
+    }, [latestMoviesPage, dispatch]);
+
+    useEffect(() => {
+        if (!popularMoviesPage) {
+            dispatch(movieActions.getAllMovies({movies_list: 'popular', query: ''}));
+        }
+    }, [popularMoviesPage, dispatch]);
+
+    useEffect(() => {
+        if (!topRatedMoviesPage) {
+            dispatch(movieActions.getAllMovies({movies_list: 'topRated', query: ''}));
+        }
+    }, [topRatedMoviesPage, dispatch]);
+
+    useEffect(() => {
+        if (!upcomingMoviesPage) {
+            dispatch(movieActions.getAllMovies({movies_list: 'upcoming', query: ''}));
+        }
+    }, [upcomingMoviesPage, dispatch]);
+
 
     return (
         <div>
-            <PosterPreview/>
-            <CertainMoviesList movies={popularMoviesPage.results} typeName={'Popular'}/>
-            <CertainMoviesList movies={topRatedMoviesPage.results} typeName={'TopRated'}/>
-            <CertainMoviesList movies={upcomingMoviesPage.results} typeName={'Upcoming'}/>
+            {latestMoviesPage && <PosterPreview movies={latestMoviesPage.results}/>}
+            {popularMoviesPage && <CertainMoviesList movies={popularMoviesPage} typeName={'Popular'}/>}
+            {topRatedMoviesPage && <CertainMoviesList movies={topRatedMoviesPage} typeName={'TopRated'}/>}
+            {upcomingMoviesPage && <CertainMoviesList movies={upcomingMoviesPage} typeName={'Upcoming'}/>}
         </div>
     );
 };

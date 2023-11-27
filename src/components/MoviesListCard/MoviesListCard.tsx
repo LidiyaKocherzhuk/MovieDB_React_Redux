@@ -4,13 +4,14 @@ import {useLocation, useParams} from "react-router-dom";
 
 import css from './MoviesListCard.module.css';
 import {MovieCard} from "./MovieCard";
-import {useAppContext, useAppSelector} from "../../hooks";
+import {useAppContext, useAppDispatch, useAppSelector} from "../../hooks";
+import {movieActions} from "../../redux";
 
 const MoviesListCard = () => {
 
-    const {allMoviesPage} = useAppSelector(state => state.movieReducer);
     const {setQueryParams} = useAppContext();
     const location = useLocation();
+    const dispatch = useAppDispatch();
     const {movies_list} = useParams();
 
     const queryObj = new URLSearchParams(location.search);
@@ -18,7 +19,10 @@ const MoviesListCard = () => {
     let with_genres = Number(queryObj.get('with_genres')) || null;
     let query = queryObj.get('query') || '';
 
+    const {allMoviesPage} = useAppSelector(state => state.movieReducer);
+
     useEffect(() => {
+        dispatch(movieActions.getAllMovies({movies_list, query: location.search}));
         window.scrollTo(0, 0);
         setQueryParams({page, with_genres, query});
     }, [page, with_genres, query]);
@@ -58,7 +62,8 @@ const MoviesListCard = () => {
                     <div className={css.pages}>
                         <span onClick={() => first()}>1</span>
                         <b>... {page} ...</b>
-                        <span onClick={() => last()}>{movies_list === 'search' ? allMoviesPage.total_pages : '500'}</span>
+                        <span
+                            onClick={() => last()}>{movies_list === 'search' ? allMoviesPage.total_pages : '500'}</span>
                     </div>
                     <div className={css.next} onClick={() => next()}><AiOutlineRight/></div>
                 </div>

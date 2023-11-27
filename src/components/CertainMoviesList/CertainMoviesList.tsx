@@ -4,17 +4,21 @@ import {useNavigate} from "react-router-dom";
 
 import css from './CertainMoviesList.module.css';
 import {MovieCard} from "../MoviesListCard";
-import {IMovie} from "../../interfaces";
+import {IMoviePage} from "../../interfaces";
+import {useAppDispatch} from "../../hooks";
+import {movieActions} from "../../redux";
 
 interface IProps extends PropsWithChildren {
-    movies: IMovie[],
+    movies: IMoviePage,
     typeName: string,
 }
 
 const CertainMoviesList: FC<IProps> = ({movies, typeName}) => {
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const moveToMoviesPage = () => {
+    const showMovies = () => {
+        dispatch(movieActions.setMovies({movies}));
         navigate(`/movies/${typeName.toLowerCase()}`);
     }
 
@@ -23,7 +27,7 @@ const CertainMoviesList: FC<IProps> = ({movies, typeName}) => {
             <h3>{typeName}</h3>
 
             <div className={css.more_movies}>
-                <div className={css.more_movies_btn} onClick={() => moveToMoviesPage()}>
+                <div className={css.more_movies_btn} onClick={() => showMovies()}>
                     <p>See more </p>
                     <BsArrowRight/>
                 </div>
@@ -31,7 +35,7 @@ const CertainMoviesList: FC<IProps> = ({movies, typeName}) => {
 
             <div className={css.movies_bloc}>
                 {
-                    movies.slice(0, 5).map((movie) => <MovieCard key={movie.id} movie={movie}/>)
+                    movies.results.slice(0, 5).map((movie) => <MovieCard key={movie.id} movie={movie}/>)
                 }
             </div>
 

@@ -1,11 +1,8 @@
-import React, {FC, PropsWithChildren} from 'react';
+import React from 'react';
 
 import {MoviesListCard} from "../components";
 
-interface IProps extends PropsWithChildren {
-}
-
-const MoviesPage: FC<IProps> = () => {
+const MoviesPage = () => {
     return (
         <>
             <MoviesListCard/>

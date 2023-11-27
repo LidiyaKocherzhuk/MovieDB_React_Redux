@@ -1,7 +1,7 @@
 import React from 'react';
 import {ImSun} from "react-icons/im";
 import {RxMoon} from "react-icons/rx";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import css from './Header.module.css';
 import {useAppContext, useAppDispatch} from "../../hooks";
@@ -12,17 +12,17 @@ const Header = () => {
 
     const {setTheme, theme, setGenresVisibility} = useAppContext();
     const dispatch = useAppDispatch();
-    const location = useLocation();
     const navigate = useNavigate();
 
-    const moveToMoviesPage = async (params: string) => {
+    const showMovies = async (mov: string) => {
+
         const {meta: {requestStatus}} = await dispatch(movieActions.getAllMovies({
-            movies_list: params,
-            query: location.search
+            movies_list: mov,
+            query: '',
         }));
 
         if (requestStatus === 'fulfilled') {
-            navigate(`/movies/${params}`);
+            navigate(`/movies/${mov}`);
         }
     };
 
@@ -37,9 +37,9 @@ const Header = () => {
                     <span></span>
                 </div>
 
-                <div className={css.nav_movies} onClick={() => moveToMoviesPage('all')}>Movies</div>
+                <div className={css.nav_movies} onClick={() => showMovies('all')}>Movies</div>
 
-                <div className={css.nav_new} onClick={() => () => moveToMoviesPage('popular')}>New & Popular</div>
+                <div className={css.nav_new} onClick={() => showMovies('popular')}>New & Popular</div>
 
             </div>
 
