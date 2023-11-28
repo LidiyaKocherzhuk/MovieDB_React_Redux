@@ -22,7 +22,7 @@ const MoviesListCard = () => {
     const {allMoviesPage} = useAppSelector(state => state.movieReducer);
 
     useEffect(() => {
-        dispatch(movieActions.getAllMovies({movies_list, query: location.search}));
+        dispatch(movieActions.getAllMovies({movies_list: movies_list || 'all', query: location.search}));
         window.scrollTo(0, 0);
         setQueryParams({page, with_genres, query});
     }, [page, with_genres, query]);
@@ -51,23 +51,26 @@ const MoviesListCard = () => {
         <div>
             <h1>{movies_list[0].toUpperCase()}{movies_list.slice(1)} movies</h1>
             <hr/>
-            <div className={css.MoviesListCard}>
+            {allMoviesPage &&
+                <div className={css.MoviesListCard}>
 
-                <div className={css.moviesList}>
-                    {allMoviesPage.results.map((movie) => <MovieCard key={movie.id} movie={movie}/>)}
-                </div>
 
-                <div className={css.pagination_bloc}>
+                  <div className={css.moviesList}>
+                      {allMoviesPage.results.map((movie) => <MovieCard key={movie.id} movie={movie}/>)}
+                  </div>
+
+                  <div className={css.pagination_bloc}>
                     <div className={css.prev} onClick={() => prev()}><AiOutlineLeft/></div>
                     <div className={css.pages}>
-                        <span onClick={() => first()}>1</span>
-                        <b>... {page} ...</b>
-                        <span
-                            onClick={() => last()}>{movies_list === 'search' ? allMoviesPage.total_pages : '500'}</span>
+                      <span onClick={() => first()}>1</span>
+                      <b>... {page} ...</b>
+                      <span
+                          onClick={() => last()}>{movies_list === 'search' ? allMoviesPage.total_pages : '500'}</span>
                     </div>
                     <div className={css.next} onClick={() => next()}><AiOutlineRight/></div>
+                  </div>
                 </div>
-            </div>
+            }
         </div>
     );
 };

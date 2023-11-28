@@ -1,18 +1,21 @@
-import React, {FC, PropsWithChildren} from 'react';
+import React from 'react';
 import {ImSearch} from "react-icons/im";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 import css from './Search.module.css';
+import {useAppDispatch} from "../../hooks";
+import {movieActions} from "../../redux";
 
-interface IProps extends PropsWithChildren {
-}
-
-const Search: FC<IProps> = () => {
+const Search = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const location = useLocation();
+
     const search = async () => {
         const inputElement = document.getElementById('search') as HTMLInputElement;
 
         if (inputElement.value) {
+            dispatch(movieActions.getAllMovies({movies_list: 'search', query:`?query=${inputElement.value}`}));
             navigate(`movies/search?query=${inputElement.value}`);
         } else {
             navigate('movies/all');

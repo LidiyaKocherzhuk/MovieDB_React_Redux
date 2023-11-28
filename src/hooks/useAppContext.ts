@@ -2,7 +2,7 @@ import {useContext} from "react";
 import {useSearchParams} from "react-router-dom";
 
 import {Context} from "../hoc";
-import {IContextState, IGenre, IUseContext} from "../interfaces";
+import {IContextState, IUseContext} from "../interfaces";
 import {urls} from "../constants";
 
 const useAppContext = (): IUseContext => {
@@ -12,14 +12,6 @@ const useAppContext = (): IUseContext => {
     return {
         theme: state.theme,
         setTheme: () => setState((prev: IContextState) => ({...prev, theme: !prev.theme})),
-
-        genresVisibility: state.genresVisibility,
-        setGenresVisibility: () => setState((prev: IContextState) => (
-            {
-                ...prev,
-                genresVisibility: !prev.genresVisibility,
-            }
-        )),
 
         posterPath: state.posterPath,
         setPosterPath: (value: string) => setState((prev: IContextState) => (

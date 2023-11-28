@@ -2,17 +2,18 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 
 import css from './Genres.module.css';
-import {useAppContext, useAppSelector} from "../../hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {genreActions} from "../../redux";
 
 const Genres = () => {
 
-    const {genresVisibility, setGenresVisibility} = useAppContext();
-    const {genres} = useAppSelector(state => state.genreReducer);
+    const {genres, genresVisibility} = useAppSelector(state => state.genreReducer);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const moviesByTheGenre = (genreId: number) => {
         navigate(`/movies/all?page=1&with_genres=${genreId.toString()}`);
-        setGenresVisibility();
+        dispatch(genreActions.switchGenresVisibility());
     }
 
     return (

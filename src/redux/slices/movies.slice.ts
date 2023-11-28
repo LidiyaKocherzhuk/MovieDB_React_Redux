@@ -64,15 +64,10 @@ const getAllMovies = createAsyncThunk<{ movies: IMoviePage, page: string }, { mo
                             dispatch(movieActions.setLatestMovies({movies: data}));
                         });
                     break;
-                // case 'search':
-                //     const queryParams = new URL(request.url).searchParams;
-                //
-                //     const {data} = await movieService.search({
-                //         page: queryParams.get('page'),
-                //         query: queryParams.get('query'),
-                //     });
-                //     movies = data;
-                //     break;
+                case 'search':
+                    await movieService.search(query)
+                        .then(({data}) => movies = data);
+                    break;
             }
 
             return {movies, page: movies_list};

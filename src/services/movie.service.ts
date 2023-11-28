@@ -1,7 +1,7 @@
 import {axiosService} from "./axios.service";
 import {urls} from "../constants";
 import {IRes} from "../types";
-import {IMovieDetail, IMoviePage, IQueryParams} from "../interfaces";
+import {IMovieDetail, IMoviePage} from "../interfaces";
 
 const movieService = {
     getAll: (queryParams: string): IRes<IMoviePage> => axiosService.get(urls.movies + queryParams).then(),
@@ -10,10 +10,7 @@ const movieService = {
     getTopRated: (queryParams: string): IRes<IMoviePage> => axiosService.get(urls.topRated + queryParams).then(),
     getUpcoming: (queryParams: string): IRes<IMoviePage> => axiosService.get(urls.upcoming + queryParams).then(),
     getById: (id: string): IRes<IMovieDetail> => axiosService.get(urls.byId(id)).then(),
-    search: (queryParams: IQueryParams): IRes<IMoviePage> => axiosService.get(
-        urls.search,
-        {params: queryParams}
-    ).then(),
+    search: (queryParams: string): IRes<IMoviePage> => axiosService.get(urls.search + queryParams).then(),
 };
 
 export {movieService};

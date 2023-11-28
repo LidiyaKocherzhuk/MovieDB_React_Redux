@@ -6,11 +6,11 @@ import {useNavigate} from "react-router-dom";
 import css from './Header.module.css';
 import {useAppContext, useAppDispatch} from "../../hooks";
 import {Search} from "../Search";
-import {movieActions} from "../../redux";
+import {genreActions, movieActions} from "../../redux";
 
 const Header = () => {
 
-    const {setTheme, theme, setGenresVisibility} = useAppContext();
+    const {setTheme, theme} = useAppContext();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const Header = () => {
 
             <div className={css.nav_side}>
 
-                <div className={css.nav_bar} onClick={() => setGenresVisibility()}>
+                <div className={css.nav_bar} onClick={() => dispatch(genreActions.switchGenresVisibility())}>
                     <span className={`${css.nav_bar_element} ${theme ? css.nav_bar_light : css.nav_bar_dark}`}></span>
                     <span></span>
                     <span></span>
